@@ -24,19 +24,18 @@ class MainActivity : AppCompatActivity() {
                 tvCount.text = (++btnCount).toString()
             }
             btnDownload.setOnClickListener {
-
-                CoroutineScope(Dispatchers.IO).launch {
+                for (i in 0..3)
+                CoroutineScope(Dispatchers.Main).launch {
                     /*
                     https://developer.android.com/reference/android/os/Looper#:~:text=android.os.Looper,until%20the%20loop%20is%20stopped.
                     UI thread가 아닌 곳에서 UI 호출을 시도하면 "Can’t create handler inside thread that has not called Looper.prepare()" 발생,
                     Looper - Message loop를 실행시키기 위해 사용됨.
                     */
-
-                    download()
-                    Looper.prepare()
-                    Toast.makeText(baseContext, "Job Finished", Toast.LENGTH_SHORT).show()
-                    Looper.loop()
-
+//                    download()
+//                    Looper.prepare()
+//                    Toast.makeText(baseContext, "Job Finished", Toast.LENGTH_SHORT).show()
+//                    Looper.loop()
+                    tvUserMessage.text = UserDataManager1().getTotalUserCount().toString()
                 }
                 // download() // It will start at main thread
             }
@@ -44,13 +43,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private suspend fun download() {
-        for ( i in 0 .. 1000) {
-            Log.e("TAG", "Downloading user $i in ${Thread.currentThread().name}")
+        for ( i in 0 .. 20000) {
+            //Log.e("TAG", "Downloading user $i in ${Thread.currentThread().name}")
             // Coroutine은 withContext() 함수로 쉽게 쓰레드 변경을 할 수 있다.
-            withContext(Dispatchers.Main) {
+            /*withContext(Dispatchers.Main) {
                 // UI에 text를 사용하기 위해 쓰레드 변경
                 binding.tvUserMessage.text = "Downloading user $i in ${Thread.currentThread().name}"
-            }
+            }*/
         }
     }
 }
