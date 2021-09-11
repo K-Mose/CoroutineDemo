@@ -35,7 +35,8 @@ class MainActivity : AppCompatActivity() {
 //                    Looper.prepare()
 //                    Toast.makeText(baseContext, "Job Finished", Toast.LENGTH_SHORT).show()
 //                    Looper.loop()
-                    tvUserMessage.text = UserDataManager1().getTotalUserCount().toString()
+//                    tvUserMessage.text = UserDataManager1().getTotalUserCount().toString()
+                    tvUserMessage.text = UserDataManager2().getTotalUserCount().toString()
                 }
                 // download() // It will start at main thread
             }
